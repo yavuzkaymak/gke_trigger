@@ -6,4 +6,6 @@ def delete(deployment: Deployment):
 def create(deployment: Deployment):
     print(f"Deployment {deployment.name} has been created with {deployment.spec.replica} replicas")
 
+    print(f"Here is the json representaton: {deployment.model_dump_json()}")
+
 
