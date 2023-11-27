@@ -1,10 +1,18 @@
+from model.Scaler import Scaler
+from model.Scaler import KedaPubSub
 from .IRule import BaseRule
 
 
 class SNSRule(BaseRule):
 
-    def __init__(self, foo: str):
-        pass
+    def __init__(self, name: str):
+        self.rule_name = name
+        self._scaler = KedaPubSub(name=self.rule_name, subscriptionName=f"pubsub_{self.rule_name}", authenticationRef="auth-df", scaled_target=f"sns-adapter_{self.rule_name}")
+
+    @property
+    def scaler(self) -> Scaler:
+        return self._scaler
+
 
     def deploy_dataflow(self):
         pass

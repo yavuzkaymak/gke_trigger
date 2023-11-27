@@ -1,4 +1,5 @@
-from abc import ABCMeta, abstractmethod, abstractstaticmethod
+from abc import ABCMeta, abstractmethod
+from model.Scaler import Scaler
 
 
 class BaseRule(metaclass=ABCMeta):
@@ -17,3 +18,7 @@ class BaseRule(metaclass=ABCMeta):
     def common_property(self):
         pass
 
+    @property
+    @abstractmethod
+    def scaler(self) -> Scaler:
+        pass
