@@ -3,7 +3,7 @@ from .IRule import BaseRule
 
 class SQSRule(BaseRule):
 
-    def __init__(self, foo: str):
+    def __init__(self, ruleName: str):
         pass
 
     def deploy_dataflow(self):

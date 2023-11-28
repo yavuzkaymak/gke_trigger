@@ -18,6 +18,7 @@ async def delete(deployment: Deployment) -> str:
 
 @app.put(path="/deploy/")
 async def rule_deployer(rule: dict):
+    print(rule)
     rule = RuleFactory(rule).getRule()
     rule.deploy_dataflow()
     Deployment_Service.apply_manifest(rule.scaler.manifest)

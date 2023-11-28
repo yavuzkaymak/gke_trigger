@@ -7,14 +7,13 @@ from dataclasses import dataclass, field
 @dataclass
 class RuleFactory:
     body: dict
-    __rule: BaseRule = field(repr=False)
-
-    def __post_init__(self):
-        rule_name = self.body.get("ruleName")
-        if rule_name == "sns":
-            self.__rule = SNSRule(**self.body)
-        if rule_name == "sqs":
-            self.__rule = SQSRule(**self.body)
+    rule: BaseRule = field(init=False, default="")
 
     def getRule(self) -> BaseRule:
-        return self.__rule
+        rule_name = self.body.get("ruleName")
+        if rule_name == "sns":
+            return SNSRule(**self.body)
+        if rule_name == "sqs":
+            return SQSRule(**self.body)
+        else:
+            raise Exception(f"Unknown rule type: {rule_name}")
