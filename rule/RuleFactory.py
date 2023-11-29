@@ -1,19 +1,18 @@
-from .SQSRule import SQSRule
-from .SNSRule import SNSRule
 from .IRule import BaseRule
-from dataclasses import dataclass, field
+from pydantic import BaseModel, Extra, ConfigDict
+from importlib import import_module
 
 
-@dataclass
-class RuleFactory:
-    body: dict
-    rule: BaseRule = field(init=False, default="")
+class RuleFactory(BaseModel):
+    rule_name: str
+    rule_type: str
+    model_config = ConfigDict(use_enum_values=True, extra=Extra.allow)
 
     def getRule(self) -> BaseRule:
-        rule_name = self.body.get("ruleName")
-        if rule_name == "sns":
-            return SNSRule(**self.body)
-        if rule_name == "sqs":
-            return SQSRule(**self.body)
-        else:
-            raise Exception(f"Unknown rule type: {rule_name}")
+        _rule = self.rule_type.upper() + "Rule"
+        module = import_module(self.__module__.split(".")[0])
+        try:
+            class_ = getattr(module, _rule)
+            return class_(**self.__dict__)
+        except AttributeError:
+            raise Exception(f"{self.rule_type} is not a registered rule type")

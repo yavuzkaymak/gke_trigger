@@ -5,8 +5,8 @@ from .IRule import BaseRule
 
 class SNSRule(BaseRule):
 
-    def __init__(self, ruleName: str):
-        self.rule_name = ruleName
+    def __init__(self, rule_name: str, **kwargs):
+        self.rule_name = rule_name
         self._scaler = KedaPubSub(name=self.rule_name, subscriptionName=f"pubsub_{self.rule_name}", authenticationRef="auth-df", scaled_target=f"sns-adapter_{self.rule_name}")
 
     @property
