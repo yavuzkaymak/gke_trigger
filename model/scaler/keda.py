@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 import yaml
 from typing import Optional
-from .IScaler import Scaler
+from . import Scaler
 
 
 @dataclass

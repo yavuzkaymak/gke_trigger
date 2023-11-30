@@ -1,6 +1,6 @@
-from model.Scaler import Scaler
-from model.Scaler import KedaPubSub
-from .IRule import BaseRule
+from model.scaler import Scaler
+from model.scaler import KedaPubSub
+from .irule import BaseRule
 
 
 class SNSRule(BaseRule):

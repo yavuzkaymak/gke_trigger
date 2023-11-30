@@ -1,6 +1,6 @@
-from model.Scaler import Scaler
-from model.Scaler.HPA import HPAScaler
-from .IRule import BaseRule
+from model.scaler import Scaler
+from model.scaler.hpa import HPAScaler
+from .irule import BaseRule
 
 
 class SQSRule(BaseRule):

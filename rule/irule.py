@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from model.Scaler import Scaler
+from model.scaler import Scaler
 
 
 class BaseRule(metaclass=ABCMeta):
